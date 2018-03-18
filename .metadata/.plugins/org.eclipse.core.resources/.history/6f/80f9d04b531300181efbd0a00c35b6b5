@@ -1,0 +1,43 @@
+package cpe593;
+
+import java.util.Random;
+
+public class quicksort {
+	public static void swap(int[] a, int l, int r) {
+		int temp = a[l];
+		a[l] = a[r];
+		a[r] = temp;
+	}
+	public static void quicksorts(int[] a, int start, int end) {
+		if(start >= end) return;
+		if(start == end - 1) {
+			if(a[start] > a[end]) {
+				swap(a, a[start], a[end]);
+			}
+			return;
+		}
+		int pivot = new Random().nextInt();
+		int l = start;
+		int r = end;
+		while(l < r) {
+			while(r >= start && a[r] >= pivot) {
+				r --;
+			}
+			while(l <= end && a[l] < pivot) {
+				l ++;
+			}
+			if(l < r) swap(a, l, r);
+		}
+		quicksorts(a, start, l - 1);
+		quicksorts(a, l, end);
+	}
+	public static void main(String[] args) {
+		int[] a = {2, 5, 76, 623, 676, 33, 32, 11, 11};
+		quicksorts(a, 0, a.length - 1);
+		for(int e : a) {
+			System.out.print(e + " ");
+		}
+		
+	}
+
+}
